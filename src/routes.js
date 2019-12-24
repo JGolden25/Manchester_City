@@ -1,11 +1,11 @@
 import React from 'react';
-
+import Layout from './Hoc/Layout';
 
 const Routes = (props) => {
   return(
-    <div>
-      hello
-    </div>
+    <Layout>
+      second line
+    </Layout>
   )
 }
 
