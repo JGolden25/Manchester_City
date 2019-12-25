@@ -4,10 +4,47 @@ import Animate from 'react-move/Animate';
 
 class Stripes extends Component {
     
+    state = {
+        stripes: [
+            {
+                background:'#98c5e9'
+            },
+            {
+                background: '#ffffff'
+            },
+            {
+                background: '##98c5e9'
+            }
+        ]
+    }
+
     showStripes = () => (
-        <div>
-            stripes
-        </div>
+        this.state.stripes.map((stripe,i)=> (
+            <Animate
+            key={i}
+            show={true}
+
+            start={{
+                background:"#ffffff"
+            }}
+
+            enter={{
+                background:[stripe.background]
+            }}
+            >
+                {(background)=> {
+                    return(
+                        <div
+                        className="stripe"
+                        style={{
+                            background
+                        }}
+                        ></div>
+                    )
+                }}
+
+            </Animate>
+        ))
     )
     
     render() {
