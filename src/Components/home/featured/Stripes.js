@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { easePolyOut } from 'd3-ease';
 import Animate from 'react-move/Animate';
 
+
 class Stripes extends Component {
     
     state = {
@@ -50,7 +51,12 @@ class Stripes extends Component {
                 left:[stripe.left],
                 rotate:[stripe.rotate],
                 top:[stripe.top],
-                timing: {delay:500, duration: 200, ease: easePolyOut}
+                timing: {delay:stripe.delay, duration: 200, ease: easePolyOut},
+                events:{
+                    end(){
+                        console.log('animation done')
+                    }
+                }
             }}
             >
                 {({opacity,left,rotate,top,background})=> {
