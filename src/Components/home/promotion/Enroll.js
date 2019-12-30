@@ -22,26 +22,11 @@ class Enroll extends Component {
                 },
                 validation:{
                     required: true,
-                    email: true
+                
                 },
                 valid: false,
                 validationMessage:''
             }
-        },
-        password:{
-            element:'input',
-            value:'',
-            config:{
-                name:'pasword_input',
-                type: 'password',
-                placeholder: 'Enter your password'
-            },
-            validation:{
-                required: true,
-                email: true
-            },
-            valid: false,
-            validationMessage:''
         }
     
 
