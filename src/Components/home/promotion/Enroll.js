@@ -27,9 +27,27 @@ class Enroll extends Component {
                 valid: false,
                 validationMessage:''
             }
+        },
+        password:{
+            element:'input',
+            value:'',
+            config:{
+                name:'pasword_input',
+                type: 'password',
+                placeholder: 'Enter your password'
+            },
+            validation:{
+                required: true,
+                email: true
+            },
+            valid: false,
+            validationMessage:''
         }
+    
+
 
     }
+
 
     updateForm(element){
         const newFormdata = {...this.state.formdata}
@@ -61,7 +79,7 @@ class Enroll extends Component {
         this.setState({
             formError:false,
             formdata: newFormdata,
-            formSuccess: type ? 'You have successfully entered the drawing!' : 'Already on the database'
+            formSuccess: type ? 'You have successfully entered!' : 'Already on the database'
         });
         this.successMessage();
     }
