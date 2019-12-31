@@ -24,5 +24,6 @@ const firebaseTeams = firebaseDB.ref('teams')
      firebase,
      firebaseMatches,
      firebasePromotions,
-     firebaseTeams
+     firebaseTeams,
+     firebaseDB
  }

@@ -4,6 +4,7 @@ import FormField from '../../ui/formFields';
 import { validate } from '../../ui/misc';
 
 import { firebaseTeams , firebaseDB, firebaseMatches } from '../../../firebase';
+import { firebaseLooper } from '../../ui/misc';
 
 class AddEditMatch extends Component {
     state = {
@@ -35,11 +36,10 @@ class AddEditMatch extends Component {
                     label: 'Select a local team',
                     name:'select_local',
                     type: 'select',
-                    options: [{key: 'Yes', value:'Yes'}, {key:'No', value: 'No'}]
+                    options: []
                 },
                 validation:{
-                    required: true,
-                    email:true
+                    required: true
                 },
                 valid: false,
                 validationMessage:'',
@@ -183,6 +183,31 @@ class AddEditMatch extends Component {
         })
     }
 
+    updateFields(match, teamOptions, teams, type, matchId){
+        const newFormdata = {
+            ...this.state.formdata
+        }
+
+        for(let key in newFormdata){
+            if(match){
+                newFormdata[key].value = match[key];
+                newFormdata[key].valid = true;
+            }
+            if(key === 'local' || key === 'away'){
+                newFormdata[key].config.options = teamOptions
+            }
+        }
+        
+        this.setState({
+            matchId,
+            formType:type,
+            formdata: newFormdata,
+            teams
+        })
+
+    }
+
+
     componentDidMount(){
         const matchId = this.props.match.params.id;
         const getTeams = (match, type) => {
@@ -213,6 +238,64 @@ class AddEditMatch extends Component {
 
     }
 
+    successForm(message){
+        this.setState({
+            formSuccess: message
+        });
+
+        setTimeout(()=>{
+            this.setState({
+                formSuccess: ''
+            });
+        }, 2000)
+    }
+
+
+    submitForm(event){
+        event.preventDefault();
+        
+        let dataToSubmit = {};
+        let formIsValid = true;
+
+        for(let key in this.state.formdata){
+            dataToSubmit[key] = this.state.formdata[key].value;
+            formIsValid = this.state.formdata[key].valid && formIsValid;
+        }
+
+        this.state.teams.forEach((team)=>{
+            if(team.shortName === dataToSubmit.local){
+                dataToSubmit['localThmb'] =  team.thmb
+            }
+            if(team.shortName === dataToSubmit.away){
+                dataToSubmit['awayThmb'] =  team.thmb
+            }
+        })
+
+
+        if(formIsValid){
+            if(this.state.formType === 'Edit Match'){
+                firebaseDB.ref(`matches/${this.state.matchId}`)
+                .update(dataToSubmit).then(()=>{
+                    this.successForm('Updated correctly');
+                }).catch((e)=>{
+                    this.setState({ formError: true })
+                })
+            } else {
+                firebaseMatches.push(dataToSubmit).then(()=>{
+                    this.props.history.push('/admin_matches');
+                }).catch((e)=>{
+                    this.setState({ formError: true })
+                })
+            }
+
+
+        } else {
+            this.setState({
+                formError: true
+            })
+        }
+    }
+
     render() {
         return (
             <AdminLayout>
@@ -233,17 +316,17 @@ class AddEditMatch extends Component {
                                 <div className="wrapper">
                                     <div className="left">
                                     <FormField
-                            id={'local'}
-                            formdata={this.state.formdata.local}
-                            change={(element)=> this.updateForm(element)}
-                            />
+                                            id={'local'}
+                                            formdata={this.state.formdata.local}
+                                            change={(element)=> this.updateForm(element)}
+                                        />
                                     </div>
                                     <div>
-                                    <FormField
-                            id={'resultLocal'}
-                            formdata={this.state.formdata.resultLocal}
-                            change={(element)=> this.updateForm(element)}
-                            />
+                                        <FormField
+                                            id={'resultLocal'}
+                                            formdata={this.state.formdata.resultLocal}
+                                            change={(element)=> this.updateForm(element)}
+                                        />
                                     </div>
                                 </div>
                             </div>
