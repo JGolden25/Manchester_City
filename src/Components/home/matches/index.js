@@ -11,7 +11,7 @@ const MatchesHome = () => {
                 size="50px"
                 color="#ffffff"
                 add={{
-                    color: 'red'
+                    color: '#ffffff'
                 }}
                 >
                 Matches
@@ -27,7 +27,7 @@ const MatchesHome = () => {
                     See more matches
                 </Tag>
 
-                TAG
+                
             </div>
         </div>
     );
