@@ -11,7 +11,7 @@ state = {
 }
 
 componentDidMount() {
-    firebaseMatches.limitToLast(6).once('value').then((snapshot)=>{
+    firebaseMatches.limitToLast(7).once('value').then((snapshot)=>{
         const matches = firebaseLooper(snapshot);
 
         this.setState({
