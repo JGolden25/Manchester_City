@@ -6,7 +6,7 @@ import Stripes from '../../Resources/images/stripes.png';
 import { firebasePlayers, firebase } from '../../firebase';
 import { firebaseLooper } from '../ui/misc';
 import { Promise } from 'core-js';
-
+  
 class TheTeam extends Component {
 
     state = {
@@ -31,6 +31,7 @@ class TheTeam extends Component {
                     })
                 )
             }
+
             Promise.all(promises).then(()=>{
                 this.setState({
                     loading: false,
@@ -43,7 +44,7 @@ class TheTeam extends Component {
         })
     }
 
-    showPlayersByCategory = (category) => (
+    showplayersByCategory = (category) => (
         this.state.players ?
             this.state.players.map((player,i)=>{
                 return player.position === category ?
@@ -66,45 +67,45 @@ class TheTeam extends Component {
     render() {
         return (
             <div className="the_team_container"
-            style={{
-                background:`url(${Stripes}) repeat`
-            }}
-        >
-            { !this.state.loading ?
-                <div>
-                    <div className="team_category_wrapper">
-                        <div className="title">Keepers</div>
-                        <div className="team_cards">
-                            {this.showPlayersByCategory('Keeper')}
+                style={{
+                    background:`url(${Stripes}) repeat`
+                }}
+            >
+                { !this.state.loading ?
+                    <div>
+                        <div className="team_category_wrapper">
+                            <div className="title">Keepers</div>
+                            <div className="team_cards">
+                                {this.showplayersByCategory('Keeper')}
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="team_category_wrapper">
-                        <div className="title">Defence</div>
-                        <div className="team_cards">
-                            {this.showPlayersByCategory('Defense')}
+                        <div className="team_category_wrapper">
+                            <div className="title">Defence</div>
+                            <div className="team_cards">
+                                {this.showplayersByCategory('Defence')}
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="team_category_wrapper">
-                        <div className="title">Midfield</div>
-                        <div className="team_cards">
-                            {this.showPlayersByCategory('Midfield')}
+                        <div className="team_category_wrapper">
+                            <div className="title">Midfield</div>
+                            <div className="team_cards">
+                                {this.showplayersByCategory('Midfield')}
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="team_category_wrapper">
-                        <div className="title">Strikers</div>
-                        <div className="team_cards">
-                            {this.showPlayersByCategory('Striker')}
+                        <div className="team_category_wrapper">
+                            <div className="title">Strikers</div>
+                            <div className="team_cards">
+                                {this.showplayersByCategory('Striker')}
+                            </div>
                         </div>
-                    </div>
 
-                </div>
-                :null
-            }
-            
-        </div>
+                    </div>
+                    :null
+                }
+                
+            </div>
         );
     }
 }

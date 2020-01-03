@@ -160,6 +160,7 @@ class AddEditPlayers extends Component {
         })
     }
 
+
     successForm = (message) => {
         this.setState({
             formSuccess: message
@@ -222,8 +223,6 @@ class AddEditPlayers extends Component {
     storeFilename = (filename) => {
         this.updateForm({id:'image'},filename)
     }
-
-
 
     render() {
         return (
