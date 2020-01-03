@@ -55,9 +55,10 @@ class TheMatches extends Component {
 
 
     render() {
+        const state = this.state;
         return (
             <div className="the_matches_container">
-                {/* <div className="the_matches_wrapper">
+                <div className="the_matches_wrapper">
                     <div className="left">
                         <div className="match_filters">
                             <div className="match_filters_box">
@@ -110,7 +111,7 @@ class TheMatches extends Component {
                     <div className="right">
                         <LeagueTable/>
                     </div>
-                </div> */}
+                </div>
             </div>
         );
     }
