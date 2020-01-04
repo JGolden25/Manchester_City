@@ -81,7 +81,7 @@ class TheTeam extends Component {
                         </div>
 
                         <div className="team_category_wrapper">
-                            <div className="title">Defence</div>
+                            <div className="title">Defense</div>
                             <div className="team_cards">
                                 {this.showplayersByCategory('Defence')}
                             </div>
