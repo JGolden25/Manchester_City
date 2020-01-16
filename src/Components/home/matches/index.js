@@ -22,7 +22,7 @@ const MatchesHome = () => {
                 size="22px"
                 color="#0e1731"
                 link={true}
-                linkto="/theteam"
+                linkto="/the_matches"
                 >
                     See more matches
                 </Tag>
